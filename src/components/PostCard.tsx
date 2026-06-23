@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Post } from "@/lib/posts";
+import { coverUrl, type Post } from "@/lib/posts";
 
 // Card used on the home list. next/image optimizes the cover.
 export function PostCard({ post }: { post: Post }) {
@@ -8,8 +8,8 @@ export function PostCard({ post }: { post: Post }) {
     <article className="group overflow-hidden rounded-xl border border-black/10 transition-colors hover:border-foreground/40 dark:border-white/15">
       <Link href={`/posts/${post.slug}`}>
         <Image
-          src={`https://picsum.photos/id/${post.coverId}/720/280`}
-          alt="Img"
+          src={coverUrl(post, 720, 280)}
+          alt={post.title}
           width={720}
           height={280}
           className="h-44 w-full object-cover"

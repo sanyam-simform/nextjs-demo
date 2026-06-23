@@ -29,6 +29,7 @@ function parseAndValidate(formData: FormData): {
     content: String(formData.get("content") ?? "").trim(),
     author: String(formData.get("author") ?? "").trim(),
     coverId: String(formData.get("coverId") ?? "").trim(),
+    cover: String(formData.get("cover") ?? "").trim(),
   };
 
   const errors: PostFormState["fieldErrors"] = {};

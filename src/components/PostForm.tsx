@@ -51,7 +51,16 @@ export function PostForm({
         />
       </Field>
 
-      <Field label="Cover image id (picsum.photos)" error={undefined}>
+      <Field label="Cover image URL" error={undefined}>
+        <input
+          name="cover"
+          defaultValue={post?.cover}
+          placeholder="https://images.unsplash.com/…"
+          className="w-full rounded-md border border-black/15 bg-transparent px-3 py-2 text-sm dark:border-white/20"
+        />
+      </Field>
+
+      <Field label="Cover image id (picsum.photos fallback)" error={undefined}>
         <input
           name="coverId"
           defaultValue={post?.coverId}

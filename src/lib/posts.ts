@@ -10,7 +10,8 @@ export type Post = {
   title: string;
   excerpt: string;
   content: string;
-  coverId: string; // picsum.photos image id
+  coverId: string; // picsum.photos image id (legacy fallback)
+  cover?: string; // full image URL (e.g. from the seeded API); preferred when set
   author: string;
   createdAt: string;
   likes: number;
@@ -22,7 +23,16 @@ export type PostInput = {
   content: string;
   author: string;
   coverId?: string;
+  cover?: string;
 };
+
+// Resolve the cover image URL for a post: prefer an explicit full URL, else
+// fall back to the legacy picsum.photos id. The optional width/height shape the
+// picsum fallback; they're ignored when an explicit URL is present.
+export function coverUrl(post: Post, width: number, height: number): string {
+  if (post.cover) return post.cover;
+  return `https://picsum.photos/id/${post.coverId}/${width}/${height}`;
+}
 
 const DATA_FILE = path.join(process.cwd(), "data", "posts.json");
 
@@ -79,6 +89,7 @@ export async function createPost(input: PostInput): Promise<Post> {
     excerpt: input.excerpt,
     content: input.content,
     coverId: input.coverId?.trim() || String(1000 + (posts.length % 80)),
+    cover: input.cover?.trim() || undefined,
     author: input.author,
     createdAt: new Date().toISOString(),
     likes: 0,
@@ -104,6 +115,7 @@ export async function updatePost(
     content: input.content,
     author: input.author,
     coverId: input.coverId?.trim() || posts[idx].coverId,
+    cover: input.cover?.trim() || posts[idx].cover,
   };
   await writeAll(posts);
   return posts[idx];

@@ -20,9 +20,16 @@ const nextConfig: NextConfig = {
     },
   },
 
-  // Cover images come from picsum.photos.
+  // Cover images: seeded posts use Unsplash URLs; legacy posts use picsum.
+  // `unoptimized` makes the browser load images directly instead of through
+  // Next's server-side optimizer — required behind a TLS-intercepting proxy
+  // that the Node runtime can't fetch through. Works the same on Vercel.
   images: {
-    remotePatterns: [{ protocol: "https", hostname: "picsum.photos" }],
+    unoptimized: true,
+    remotePatterns: [
+      { protocol: "https", hostname: "picsum.photos" },
+      { protocol: "https", hostname: "images.unsplash.com" },
+    ],
   },
 };
 

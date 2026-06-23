@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCachedPost } from "@/lib/cached";
+import { coverUrl } from "@/lib/posts";
 import { getComments } from "@/lib/comments";
 import { LikeButton } from "@/components/LikeButton";
 import { Comments } from "@/components/Comments";
@@ -40,8 +41,8 @@ async function Article({ params }: { params: Params }) {
       </Link>
 
       <Image
-        src={`https://picsum.photos/id/${post.coverId}/800/320`}
-        alt=""
+        src={coverUrl(post, 800, 320)}
+        alt={post.title}
         width={800}
         height={320}
         priority
@@ -69,7 +70,9 @@ async function Article({ params }: { params: Params }) {
       <section className="mt-12">
         <h2 className="mb-4 text-lg font-semibold">Comments</h2>
         <Suspense
-          fallback={<p className="text-sm text-foreground/50">Loading comments…</p>}
+          fallback={
+            <p className="text-sm text-foreground/50">Loading comments…</p>
+          }
         >
           <Comments promise={getComments(post.slug)} />
         </Suspense>

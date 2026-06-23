@@ -1,0 +1,35 @@
+[
+  {
+    "id": "1",
+    "slug": "hello-nextjs-16",
+    "title": "Hello, Next.js 16",
+    "excerpt": "Why Next.js 16's Cache Components change how we think about rendering.",
+    "content": "Next.js 16 makes caching explicit. With Cache Components enabled, every page is dynamic by default and you opt specific work into the cache with the use cache directive.\n\nThis post itself is rendered from a cached read of a JSON file. Editing it in the admin invalidates the cache by tag, so you see your changes immediately.",
+    "coverId": "1015",
+    "author": "Ada Lovelace",
+    "createdAt": "2026-01-10T09:00:00.000Z",
+    "likes": 12
+  },
+  {
+    "id": "2",
+    "slug": "the-proxy-boundary",
+    "title": "The Proxy Boundary",
+    "excerpt": "middleware.ts is now proxy.ts — and the admin area lives behind it.",
+    "content": "In Next.js 16, middleware.ts becomes proxy.ts to make the network boundary explicit.\n\nIn this blog, the proxy guards every /admin route: without the admin-auth cookie you are redirected to the login page. It also redirects the legacy /blog/:slug URLs to /posts/:slug.",
+    "coverId": "1025",
+    "author": "Grace Hopper",
+    "createdAt": "2026-02-02T14:30:00.000Z",
+    "likes": 8
+  },
+  {
+    "id": "3",
+    "slug": "optimistic-by-default",
+    "title": "Optimistic by Default",
+    "excerpt": "React 19's useOptimistic makes the Like button feel instant.",
+    "content": "The Like button on each post uses React 19's useOptimistic hook. The count updates the moment you click, while the Server Action persists the change to disk in the background.\n\nIf the server write fails, React rolls the optimistic value back automatically.",
+    "coverId": "1035",
+    "author": "Linus Torvalds",
+    "createdAt": "2026-03-18T11:15:00.000Z",
+    "likes": 21
+  }
+]
